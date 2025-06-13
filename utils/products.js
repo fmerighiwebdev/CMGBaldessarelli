@@ -56,6 +56,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [piastraPortaTuboADueCorpiV, piastraPortaTuboADueCorpiV2],
   },
   {
@@ -73,6 +74,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [piastraPortaTuboCorpoUnicoV, piastraPortaTuboCorpoUnicoV2],
   },
   {
@@ -90,6 +92,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [cavallottoPortatuboTuboTestata, cavallottoPortatuboTuboTestata2],
   },
   {
@@ -112,6 +115,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [cavallottoPortatuboTesta, cavallottoPortatuboTesta2],
   },
   {
@@ -129,6 +133,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [collarePortaTuboTestata2Dim, collarePortaTuboTestata2Dim2],
   },
   // COLLARI DI TESTATA
@@ -162,6 +167,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [collareQuadratoTesta, collareQuadratoTesta2],
   },
   {
@@ -205,6 +211,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [collareRotondoTesta, collareRotondoTesta2],
   },
   {
@@ -237,6 +244,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [collareDoppioCatena, collareDoppioCatena2, collareDoppioCatena3],
   },
   {
@@ -254,6 +262,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [collareRettTestataFreccia, collareRettTestataFreccia2],
   },
   {
@@ -271,6 +280,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [collareRotondoTestataFreccia, collareRotondoTestataFreccia2],
   },
   // COLLARI INTERMEDI
@@ -304,6 +314,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [collareQuadratoDoppio, collareQuadratoDoppio2],
   },
   {
@@ -351,6 +362,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [collareRotondoDoppio, collareRotondoDoppio2],
   },
   {
@@ -383,6 +395,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [collareQuadratoSingolo, collareQuadratoSingolo2],
   },
   {
@@ -430,6 +443,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [collareRotondoSingolo, collareRotondoSingolo2],
   },
   {
@@ -457,6 +471,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [collareRettCorpoUnico, collareRettCorpoUnico2],
   },
   // CAVALLOTTI
@@ -495,6 +510,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [cavallottoSezioneQuadrata, cavallottoSezioneQuadrata2],
   },
   {
@@ -517,6 +533,7 @@ export const products = [
         }
       ],
     },
+    lastModified: "2025-06-12",
     images: [cavallottoSezioneRotonda, cavallottoSezioneRotonda2],
   },
   // TENDITORI
@@ -538,6 +555,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [tensionatore, tensionatore2],
   },
   // ACCESSORI SPECIALI
@@ -556,6 +574,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [collareRettangolareTestataSpallieraCantinelleFili],
   },
   {
@@ -573,6 +592,7 @@ export const products = [
         },
       ],
     },
+    lastModified: "2025-06-12",
     images: [
       collareRettangolarePassaggioFiloAnello,
       collareRettangolarePassaggioFiloAnello2,

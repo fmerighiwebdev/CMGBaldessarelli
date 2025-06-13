@@ -1,6 +1,3 @@
-import bruciatoreAntiBrina from "@/assets/bruciatore-anti-brina.webp";
-import bruciatoreAntiBrina2 from "@/assets/bruciatore-anti-brina-2.webp";
-
 export const news = [
   {
     slug: "bruciatore-anti-brina",
@@ -10,6 +7,8 @@ export const news = [
     description:
       "Le basse temperature invernali possono compromettere irrimediabilmente il raccolto. Il Bruciatore Anti Brina è la risposta ideale per proteggere le coltivazioni dalle gelate notturne. Grazie alla sua struttura in acciaio resistente e all'alimentazione a pellet di legno, garantisce una diffusione uniforme del calore per molte ore, creando una barriera termica che previene danni da brina.",
     ig_link: "https://www.instagram.com/reel/DGVbTpHI2IO/",
-    images: [bruciatoreAntiBrina, bruciatoreAntiBrina2],
+    published_at: "2025-06-12",
+    images: ["/images/news/bruciatore-anti-brina.webp", "/images/news/bruciatore-anti-brina-2.webp"],
+    alt: "Bruciatore Anti Brina in azione",
   },
 ];

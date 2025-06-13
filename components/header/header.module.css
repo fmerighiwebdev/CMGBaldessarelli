@@ -5,32 +5,28 @@
   left: 0;
   z-index: 999;
   width: 100%;
+  padding-block: 1rem;
   transition: all 0.2s;
   animation: fadeInFromTop 0.5s ease-in-out forwards;
 }
 
 .headerScrolled {
   background-color: black;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 999;
-  transition: all 0.2s;
 }
 
-.header nav {
+.nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.header img {
+.logoLink img {
   width: 90px;
-  height: 90px;
+  height: auto;
+  display: block;
 }
 
-.menu {
+.desktopMenu {
   display: flex;
   gap: 3rem;
   align-items: center;
@@ -39,31 +35,12 @@
   padding: 0;
 }
 
-.menu img {
-  width: 10px;
-  height: auto;
-}
-
-.menu .parentItem {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.desktopMenu li {
   position: relative;
 }
 
-.submenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background-color: var(--black);
-  padding: 1rem;
-  list-style-type: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.menu li a,
-.menu li p {
+.desktopMenu a,
+.dropdownButton {
   color: var(--white);
   font-size: 1.25rem;
   font-family: var(--body-font);
@@ -71,53 +48,101 @@
   text-decoration: none;
   transition: all 0.2s;
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.menu li a:hover {
+/* Stili specifici per il bottone del dropdown per farlo sembrare testo */
+.dropdownButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.dropdownButton:hover,
+.desktopMenu a:hover {
   color: var(--hover-color);
 }
 
-.menu .parentItem a:hover {
-  color: var(--white);
+/* NUOVO: Stile per la pagina attiva (accessibilità) */
+.desktopMenu a[aria-current="page"] {
+  color: var(--hover-color);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px; /* Diamo una larghezza minima */
+  background-color: var(--black);
+  padding: 1rem;
+  list-style-type: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px; /* Aggiungiamo un po' di stile */
+}
+
+.submenu li a {
+  font-size: 1.125rem; /* Riduciamo la dimensione per il sottomenu */
+  white-space: nowrap; /* Evita che il testo vada a capo */
 }
 
 .submenu li a:hover {
   color: var(--hover-color) !important;
 }
 
+
+/* --- HAMBURGER & MENU MOBILE --- */
+
+/* Stile per il nuovo <button> hamburger */
 .hamburger {
-  display: none;
-  margin-right: 10px;
+  display: none; /* Nascosto di default su desktop */
+  background: none;
+  border: none;
+  padding: 10px;
+  margin-right: -10px; /* Compensa il padding */
+  cursor: pointer;
+  z-index: 1000;
 }
 
-.hamburger div {
+.bar {
+  display: block;
   width: 25px;
   height: 3px;
   background-color: var(--white);
-  transition: all 0.2s;
+  transition: all 0.3s ease-in-out;
 }
 
-.hamburger div + div {
+.bar + .bar {
   margin-top: 5px;
 }
 
-.hamburgerActive div:first-child {
-  transform: rotate(45deg) translate(5px, 5px);
+/* Animazione dell'hamburger quando è attivo */
+.isOpen .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
 }
-.hamburgerActive div:nth-child(2) {
+.isOpen .bar:nth-child(2) {
   opacity: 0;
 }
-.hamburgerActive div:last-child {
-  transform: rotate(-45deg) translate(6px, -6px);
+.isOpen .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 .mobileMenu {
   position: fixed;
-  top: 70px;
+  top: 0;
   left: 0;
   width: 100%;
+  height: fit-content;
   background-color: black;
-  padding: 1.5rem 0;
+  padding: 5rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .mobileMenu ul {
@@ -126,81 +151,57 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   gap: 1rem;
   width: 100%;
 }
 
-.mobileMenu p {
-    margin: 0 10px;
+.mobileMenu li {
+  width: 100%;
+  text-align: center;
 }
 
-.mobileMenu li a {
+.mobileMenu a,
+.mobileMenu summary {
   color: var(--white);
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-family: var(--body-font);
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.2s;
-  margin-right: 10px;
+  display: block;
 }
 
-.mobileMenu li a:hover {
-  color: var(--hover-color);
+/* Stili per il nuovo menu mobile con <details> e <summary> */
+.mobileDropdown summary {
+  cursor: pointer;
+  list-style: none; /* Rimuove la freccia di default */
+}
+.mobileDropdown summary::-webkit-details-marker {
+  display: none; /* Rimuove la freccia di default su Chrome/Safari */
 }
 
-.mobileMenu li {
-  color: var(--hover-color);
-  font-size: 1.25rem;
-  font-family: var(--body-font);
-  font-weight: 500;
-  width: 100%;
-    text-align: right;
+.mobileDropdown ul {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.mobileMenu li:not(:last-child) {
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.submenuMobile {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: .125rem !important;
-}
-
-.submenuMobile li {
-    border: none !important;
-    padding: 0 !important;
-}
-
-.submenuMobile li a {
-    color: var(--white);
-    font-size: 1.125rem;
-    font-family: var(--body-font);
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.2s;
+.mobileDropdown ul a {
+  font-size: 1.125rem; /* Testo più piccolo per il sottomenu */
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 @media screen and (max-width: 768px) {
   .hamburger {
     display: block;
-    cursor: pointer;
   }
-
-  .header nav ul {
+  .desktopMenu { /* VECCHIO: .header nav ul */
     display: none;
   }
-
-  .header img {
+  .logoLink img { /* VECCHIO: .header img */
     width: 70px;
-    height: 70px;
   }
 }
 

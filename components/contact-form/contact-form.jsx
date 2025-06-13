@@ -7,7 +7,7 @@ import * as z from "zod";
 import axios from "axios";
 
 import styles from "./contact-form.module.css";
-import { products } from "@/lib/products";
+import { products } from "@/utils/products";
 
 import Input from "../input/input";
 import Select from "../select/select";
@@ -23,10 +23,14 @@ const schema = z.object({
     .string()
     .nonempty("Il campo telefono è obbligatorio.")
     .regex(/^\d{10,15}$/, "Inserisci un numero di telefono valido."),
-  email: z.string().nonempty("Il campo email è obbligatorio").email("Inserisci un indirizzo email valido."),
+  email: z
+    .string()
+    .nonempty("Il campo email è obbligatorio")
+    .email("Inserisci un indirizzo email valido."),
   product: z.string().optional(),
   message: z.string().optional(),
-  selectedCodes: z.array(z.string()).nonempty("Devi selezionare almeno un codice prodotto."),
+  selectedCodes: z
+    .array(z.string()).optional(),
   privacy: z.literal(true, {
     errorMap: () => ({ message: "Devi accettare i termini e le condizioni." }),
   }),
@@ -78,21 +82,33 @@ export default function ContactForm() {
 
   return (
     <form className={styles.contactsForm} onSubmit={handleSubmit(onSubmit)}>
-      {serverError && <p className={styles.errorBanner}>{serverError}</p>}
-      {success && <p className={styles.success}>{success}</p>}
-
+      {serverError && (
+        <p role="alert" className={styles.errorBanner}>
+          {serverError}
+        </p>
+      )}
+      {success && (
+        <p role="alert" className={styles.success}>
+          {success}
+        </p>
+      )}
       <div>
         <Input
           label="Nome e cognome"
           type="text"
           id="name"
           required
+          aria-invalid={!!errors.name}
+          aria-describedby="name-error"
           {...register("name")}
           error={errors.name?.message}
         />
-        <p className={styles.error}>{errors.name?.message}</p>
+        {errors.name && (
+          <p id="name-error" className={styles.error}>
+            {errors.name.message}
+          </p>
+        )}
       </div>
-
       <div className={styles.flexGroup}>
         <div>
           <Input
@@ -100,10 +116,16 @@ export default function ContactForm() {
             type="tel"
             id="phone"
             required
+            aria-invalid={!!errors.phone}
+            aria-describedby="phone-error"
             {...register("phone")}
             error={errors.phone?.message}
           />
-          <p className={styles.error}>{errors.phone?.message}</p>
+          {errors.phone && (
+            <p id="phone-error" className={styles.error}>
+              {errors.phone.message}
+            </p>
+          )}
         </div>
         <div>
           <Input
@@ -111,23 +133,27 @@ export default function ContactForm() {
             type="email"
             id="email"
             required
+            aria-invalid={!!errors.email}
+            aria-describedby="email-error"
             {...register("email")}
             error={errors.email?.message}
           />
-          <p className={styles.error}>{errors.email?.message}</p>
+          {errors.email && (
+            <p id="email-error" className={styles.error}>
+              {errors.email.message}
+            </p>
+          )}
         </div>
       </div>
-
       <Select
         label="Sei interessato a qualche prodotto in particolare?"
         id="product"
         {...register("product")}
         options={products}
       />
-
       {selectedProductCodes.length > 0 && (
-        <div>
-          <p>Seleziona la variante di tuo interesse:</p>
+        <fieldset className={styles.fieldset}>
+          <legend>Seleziona la variante di tuo interesse:</legend>
           {selectedProductCodes.map((article) => (
             <Checkbox
               key={article.code}
@@ -143,10 +169,11 @@ export default function ContactForm() {
               }}
             />
           ))}
-          <p className={styles.error}>{errors.selectedCodes?.message}</p>
-        </div>
+          {errors.selectedCodes && (
+            <p className={styles.error}>{errors.selectedCodes.message}</p>
+          )}
+        </fieldset>
       )}
-
       <div>
         <Input
           label="Note aggiuntive"
@@ -155,17 +182,22 @@ export default function ContactForm() {
           {...register("message")}
         />
       </div>
-
       <div>
         <Checkbox
           label="Ho letto e accetto i termini e le condizioni"
           id="privacy"
           required
           {...register("privacy")}
+          error={errors.privacy?.message}
+          aria-invalid={!!errors.privacy}
+          aria-describedby="privacy-error"
         />
-        <p className={styles.error}>{errors.privacy?.message}</p>
+        {errors.privacy && (
+          <p id="privacy-error" className={styles.error}>
+            {errors.privacy.message}
+          </p>
+        )}
       </div>
-
       <button type="submit">{isSubmitting ? <Loader /> : "Invia"}</button>
     </form>
   );

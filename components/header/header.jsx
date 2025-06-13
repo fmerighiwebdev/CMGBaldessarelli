@@ -2,200 +2,183 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import styles from "./header.module.css";
-
-import cmgLogo from "@/assets/logo-partial-white.svg";
-import downArrow from "@/assets/down-arrow.svg";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const navLinks = [
+    { label: "Azienda", href: "/#about" },
+    {
+      label: "Accessori per il Vigneto",
+      isDropdown: true,
+      submenu: [
+        {
+          label: "Accessori di Testata",
+          href: "/catalogo/accessori-di-testata",
+        },
+        { label: "Collari di Testata", href: "/catalogo/collari-di-testata" },
+        { label: "Collari Intermedi", href: "/catalogo/collari-intermedi" },
+        { label: "Cavallotti", href: "/catalogo/cavallotti" },
+        { label: "Tenditori", href: "/catalogo/tenditori" },
+        { label: "Accessori Speciali", href: "/catalogo/accessori-speciali" },
+      ],
+    },
+    { label: "Contatti", href: "/contatti" },
+    { label: "News", href: "/#news" },
+  ];
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMenuItemHovered, setIsMenuItemHovered] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 100);
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  function handleMenuOpen() {
-    setIsMenuOpen(!isMenuOpen);
-  }
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  }, [pathname]);
 
   return (
     <header
-      className={
-        isScrolled ? `${styles.header} ${styles.headerScrolled}` : styles.header
-      }
+      className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}
     >
       <div className="container">
-        <nav>
-          <Link href="/">
+        <nav className={styles.nav}>
+          <Link
+            href="/"
+            className={styles.logoLink}
+            aria-label="Homepage CMG Baldessarelli"
+          >
             <Image
-              src={cmgLogo}
-              alt="CMG BALDESSARELLI - Soluzioni per l'Agricoltura"
+              src="/images/logo-partial-white.svg"
+              alt="Logo CMG BALDESSARELLI"
+              width={70}
+              height={100}
             />
           </Link>
-          <ul className={styles.menu}>
-            <li>
-              <Link href="/#about">Azienda</Link>
-            </li>
-            <li
-              onMouseOver={() => setIsMenuItemHovered(true)}
-              onMouseLeave={() => setIsMenuItemHovered(false)}
-              className={styles.parentItem}
-            >
-              <p>Accessori per il Vigneto</p>
-              <Image src={downArrow} alt="Sottomenu" width={10} height={10} />
-              <AnimatePresence>
-                {isMenuItemHovered && (
-                  <motion.ul
-                    initial={{ opacity: 0, translateY: "-50px" }}
-                    animate={{ opacity: 1, translateY: 0 }}
-                    exit={{ opacity: 0, translateY: "-50px" }}
-                    className={styles.submenu}
+
+          <ul className={styles.desktopMenu}>
+            {navLinks.map((link) => (
+              <li
+                key={link.label}
+                onMouseLeave={() => link.isDropdown && setIsDropdownOpen(false)}
+              >
+                {link.isDropdown ? (
+                  <>
+                    <button
+                      className={styles.dropdownButton}
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      onMouseOver={() => setIsDropdownOpen(true)}
+                      aria-haspopup="true"
+                      aria-expanded={isDropdownOpen}
+                    >
+                      {link.label}
+                      <Image
+                        src="/icons/down-arrow.svg"
+                        alt=""
+                        width={10}
+                        height={10}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {isDropdownOpen && (
+                        <motion.ul
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0 }}
+                          className={styles.submenu}
+                        >
+                          {link.submenu.map((sublink) => (
+                            <li key={sublink.href}>
+                              <Link
+                                href={sublink.href}
+                                aria-current={
+                                  pathname === sublink.href ? "page" : undefined
+                                }
+                              >
+                                {sublink.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
+                  </>
+                ) : (
+                  <Link
+                    href={link.href}
+                    aria-current={pathname === link.href ? "page" : undefined}
                   >
-                    <li>
-                      <Link href="/catalogo/accessori-di-testata">
-                        Accessori di Testata
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/catalogo/collari-di-testata">
-                        Collari di Testata
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/catalogo/collari-intermedi">
-                        Collari Intermedi
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/catalogo/cavallotti">Cavallotti</Link>
-                    </li>
-                    <li>
-                      <Link href="/catalogo/tenditori">Tenditori</Link>
-                    </li>
-                    <li>
-                      <Link href="/catalogo/accessori-speciali">
-                        Accessori Speciali
-                      </Link>
-                    </li>
-                  </motion.ul>
+                    {link.label}
+                  </Link>
                 )}
-              </AnimatePresence>
-            </li>
-            <li>
-              <Link href="/contatti">Contatti</Link>
-            </li>
-            <li>
-              <Link href="/#news">News</Link>
-            </li>
+              </li>
+            ))}
           </ul>
-          <div
-            className={
-              isMenuOpen
-                ? `${styles.hamburgerActive} ${styles.hamburger}`
-                : styles.hamburger
-            }
-            onClick={handleMenuOpen}
+
+          <button
+            className={`${styles.hamburger} ${isMenuOpen ? styles.isOpen : ""}`}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Chiudi menu" : "Apri menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
           >
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
+            <div className={styles.bar} />
+            <div className={styles.bar} />
+            <div className={styles.bar} />
+          </button>
         </nav>
       </div>
+
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, y: "-100%" }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
-            transition={{ duration: 0.375 }}
             className={styles.mobileMenu}
           >
-            <div className="container">
-              <ul>
-                <li onClick={() => setIsMenuOpen(false)}>
-                  <Link href="/#about">Azienda</Link>
+            <ul>
+              {navLinks.map((link) => (
+                <li key={link.label}>
+                  {link.isDropdown ? (
+                    <details className={styles.mobileDropdown}>
+                      <summary>{link.label}</summary>
+                      <ul>
+                        {link.submenu.map((sublink) => (
+                          <li key={sublink.href}>
+                            <Link
+                              href={sublink.href}
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {sublink.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  ) : (
+                    <Link href={link.href} onClick={() => setIsMenuOpen(false)}>
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
-                <li onClick={() => setIsMenuItemHovered(!isMenuItemHovered)}>
-                  <p>Accessori per il Vigneto</p>
-                  <DropdownMenu isOpen={isMenuItemHovered}>
-                    <li onClick={() => setIsMenuOpen(false)}>
-                      <Link href="/catalogo/accessori-di-testata">
-                        Accessori di Testata
-                      </Link>
-                    </li>
-                    <li onClick={() => setIsMenuOpen(false)}>
-                      <Link href="/catalogo/collari-di-testata">
-                        Collari di Testata
-                      </Link>
-                    </li>
-                    <li onClick={() => setIsMenuOpen(false)}>
-                      <Link href="/catalogo/collari-intermedi">
-                        Collari Intermedi
-                      </Link>
-                    </li>
-                    <li onClick={() => setIsMenuOpen(false)}>
-                      <Link href="/catalogo/cavallotti">Cavallotti</Link>
-                    </li>
-                    <li onClick={() => setIsMenuOpen(false)}>
-                      <Link href="/catalogo/tenditori">Tenditori</Link>
-                    </li>
-                    <li onClick={() => setIsMenuOpen(false)}>
-                      <Link href="/catalogo/accessori-speciali">
-                        Accessori Speciali
-                      </Link>
-                    </li>
-                  </DropdownMenu>
-                </li>
-                <li onClick={() => setIsMenuOpen(false)}>
-                  <Link href="/contatti">Contatti</Link>
-                </li>
-                <li onClick={() => setIsMenuOpen(false)}>
-                  <Link href="/#news">News</Link>
-                </li>
-              </ul>
-            </div>
+              ))}
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>
     </header>
   );
 }
-
-const DropdownMenu = ({ children, isOpen }) => {
-  const ref = useRef(null);
-
-  return (
-    <motion.ul
-      initial={{ height: 0, opacity: 0 }}
-      animate={{
-        height: isOpen ? ref.current?.scrollHeight : 0,
-        opacity: isOpen ? 1 : 0,
-      }}
-      exit={{ height: 0, opacity: 0 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className={styles.submenuMobile}
-      style={{ overflow: "hidden" }}
-      ref={ref}
-    >
-      {children}
-    </motion.ul>
-  );
-};

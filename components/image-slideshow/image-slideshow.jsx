@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./image-slideshow.module.css";
 
-export default function ImageSlideshow({ images }) {
+export default function ImageSlideshow({ images, width, height }) {
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
@@ -27,6 +27,8 @@ export default function ImageSlideshow({ images }) {
           <Image
             src={image}
             alt={`Slide ${index + 1}`}
+            width={width}
+            height={height}
             className={styles.image}
           />
         </div>

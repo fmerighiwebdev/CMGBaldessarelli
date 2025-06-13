@@ -1,7 +1,7 @@
-import { products } from "../lib/products.js";
-import { news } from "../lib/news.js";
+import { products } from "../utils/products.js";
+import { news } from "../utils/news.js";
 
-const baseURL = "https://www.cmgbaldessarelli.com";
+const baseURL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.cmgbaldessarelli.com";
 
 const categories = [
   { slug: "tenditori" },
@@ -14,58 +14,57 @@ const categories = [
 
 export default function sitemap() {
   const today = new Date().toISOString().split("T")[0];
-
   const staticRoutes = [
     {
       url: `${baseURL}/`,
-      lastModified: today,
       changeFrequency: "yearly",
+      lastModified: today,
       priority: 1,
     },
     {
       url: `${baseURL}/catalogo`,
-      lastModified: today,
       changeFrequency: "monthly",
+      lastModified: today,
       priority: 0.8,
     },
     {
       url: `${baseURL}/news`,
-      lastModified: today,
       changeFrequency: "weekly",
+      lastModified: today,
       priority: 0.8,
     },
     {
       url: `${baseURL}/contatti`,
-      lastModified: today,
       changeFrequency: "yearly",
+      lastModified: today,
       priority: 0.6,
     },
     {
       url: `${baseURL}/privacy-cookie`,
-      lastModified: today,
       changeFrequency: "yearly",
+      lastModified: today,
       priority: 0.4,
     },
   ];
 
   const categoryRoutes = categories.map((category) => ({
     url: `${baseURL}/catalogo/${category.slug}`,
+    changeFrequency: "yearly",
     lastModified: today,
-    changeFrequency: "monthly",
     priority: 0.7,
   }));
 
   const productRoutes = products.map((product) => ({
     url: `${baseURL}/catalogo/${product.categorySlug}/${product.slug}`,
-    lastModified: today,
-    changeFrequency: "weekly",
+    lastModified: product.lastModified,
+    changeFrequency: "monthly",
     priority: 0.9,
   }));
 
   const newsRoutes = news.map((newsItem) => ({
     url: `${baseURL}/news/${newsItem.slug}`,
-    lastModified: today,
-    changeFrequency: "daily",
+    lastModified: newsItem.published_at,
+    changeFrequency: "yearly",
     priority: 0.9,
   }));
 

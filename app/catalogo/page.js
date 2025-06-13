@@ -1,113 +1,153 @@
 import Image from "next/image";
 import styles from "./catalogo.module.css";
 
-import catalogoPhoto from "@/assets/categorie.webp";
-import catalogoPhoto2 from "@/assets/categorie-2.webp";
-import downArrow from "@/assets/down-arrow.svg";
-import tenditori from "@/assets/tenditori.webp";
-import cavallotti from "@/assets/cavallotti.webp";
-import collariIntermedi from "@/assets/collari-intermedi.webp";
-import accessoriSpeciali from "@/assets/accessori-speciali.webp";
-import accessoriTestata from "@/assets/accessori-di-testata.webp";
-import collariDiTestata from "@/assets/collari-di-testata.webp";
-
 import Link from "next/link";
-import ImageSlideshow from "@/components/image-slideshow/image-slideshow";
 
-export const metadata = {
-  title: "Catalogo Prodotti - CMG BALDESSARELLI",
-  description:
-    "Esplora il nostro catalogo di accessori per vigneti. Scopri prodotti innovativi per la viticoltura con CMG Baldessarelli.",
-};
+function BreadcrumbJsonLd() {
+  const pageUrl = "/catalogo";
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.cmgbaldessarelli.com";
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Catalogo",
+        item: `${siteUrl}${pageUrl}`,
+      },
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+    />
+  );
+}
+
+export async function generateMetadata() {
+  const pageUrl = "/catalogo";
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.cmgbaldessarelli.com";
+  const title = "Catalogo Prodotti";
+  const description =
+    "Esplora il nostro catalogo di accessori per vigneti. Scopri tenditori, collari, cavallotti e prodotti innovativi per la viticoltura.";
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: pageUrl,
+    },
+  };
+}
 
 export default function Catalogo() {
+  const categories = [
+    {
+      name: "Tenditori",
+      slug: "tenditori",
+      image: "/images/category/tenditori.webp",
+      alt: "Tenditori professionali per fili da vigneto",
+    },
+    {
+      name: "Accessori di Testata",
+      slug: "accessori-di-testata",
+      image: "/images/category/accessori-di-testata.webp",
+      alt: "Accessori di testata per pali da vigna",
+    },
+    {
+      name: "Collari di Testata",
+      slug: "collari-di-testata",
+      image: "/images/category/collari-di-testata.webp",
+      alt: "Collari di testata per la massima stabilità",
+    },
+    {
+      name: "Collari Intermedi",
+      slug: "collari-intermedi",
+      image: "/images/category/collari-intermedi.webp",
+      alt: "Collari intermedi per pali da vigneto",
+    },
+    {
+      name: "Cavallotti",
+      slug: "cavallotti",
+      image: "/images/category/cavallotti.webp",
+      alt: "Cavallotti e ganci per fili agricoli",
+    },
+    {
+      name: "Accessori Speciali",
+      slug: "accessori-speciali",
+      image: "/images/category/accessori-speciali.webp",
+      alt: "Accessori speciali e su misura per vigneto",
+    },
+  ];
+
   return (
-    <main className={styles.catalogoPage}>
-      <section className={styles.catalogoHero}>
-        <div className={styles.catalogoOverlay}>
-          <Image src={catalogoPhoto2} alt="Catalogo" />
-          <div></div>
-        </div>
-        <div className={styles.catalogoHeroHeading}>
-          <h1>Accessori per il Vigneto</h1>
-          <p>Esplora i Nostri Prodotti</p>
-        </div>
-        <div className={styles.arrow}>
-          <Link href="#categorie">
-            <Image src={downArrow} alt="Scopri di più" />
-          </Link>
-        </div>
-      </section>
-      <section id="categorie" className={styles.catalogoCategories}>
-        <div className="container">
-          <div className={`${styles.categoriesGrid} row gap-4 gap-md-0`}>
-            <div className="col-12 col-md-6">
-              <Link href="/catalogo/tenditori">
-                <div className={styles.category}>
-                  <Image src={tenditori} alt="Tenditori" />
-                  <div className={styles.categoryOverlay}>
-                    <h3>Tenditori</h3>
-                  </div>
+    <>
+      <BreadcrumbJsonLd />
+      <main id="main-content" className={styles.catalogoPage}>
+        <section className={styles.catalogoHero}>
+          <div className={styles.catalogoOverlay}>
+            <Image
+              src="/images/category/categorie-2.webp"
+              alt="Vigneto rigoglioso con pali e accessori CMG Baldessarelli"
+              fill
+              priority
+            />
+            <div></div>
+          </div>
+          <div className={styles.catalogoHeroHeading}>
+            <h1>Accessori per il Vigneto</h1>
+            <p>Esplora i Nostri Prodotti</p>
+          </div>
+          <div className={styles.arrow}>
+            <Link href="#categorie">
+              <Image
+                src="/icons/down-arrow.svg"
+                alt="Scopri le nostre categorie"
+                width={24}
+                height={24}
+              />
+            </Link>
+          </div>
+        </section>
+        <section id="categorie" className={styles.catalogoCategories}>
+          <div className="container">
+            <div className="row g-4">
+              {categories.map((category) => (
+                <div key={category.slug} className="col-12 col-md-6">
+                  <Link
+                    href={`/catalogo/${category.slug}`}
+                    className={styles.categoryLink}
+                  >
+                    <div className={styles.category}>
+                      <Image
+                        src={category.image}
+                        alt={category.alt}
+                        width={600}
+                        height={400}
+                      />
+                      <div className={styles.categoryOverlay}>
+                        <h2>{category.name}</h2>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
-              </Link>
-            </div>
-            <div className="col-12 col-md-6">
-              <Link href="/catalogo/accessori-di-testata">
-                <div className={styles.category}>
-                  <Image src={accessoriTestata} alt="Accessori Testata" />
-                  <div className={styles.categoryOverlay}>
-                    <h3>Accessori di Testata</h3>
-                  </div>
-                </div>
-              </Link>
+              ))}
             </div>
           </div>
-          <div className={`${styles.categoriesGrid} row gap-4 gap-md-0`}>
-            <div className="col-12 col-md-6">
-              <Link href="/catalogo/collari-di-testata">
-                <div className={styles.category}>
-                  <Image src={collariDiTestata} alt="Collari di Testata" />
-                  <div className={styles.categoryOverlay}>
-                    <h3>Collari di Testata</h3>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-12 col-md-6">
-              <Link href="/catalogo/collari-intermedi">
-                <div className={styles.category}>
-                  <Image src={collariIntermedi} alt="Collari Intermedi" />
-                  <div className={styles.categoryOverlay}>
-                    <h3>Collari Intermedi</h3>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          </div>
-          <div className={`${styles.categoriesGrid} row gap-4 gap-md-0`}>
-            <div className="col-12 col-md-6">
-              <Link href="/catalogo/cavallotti">
-                <div className={styles.category}>
-                  <Image src={cavallotti} alt="Cavallotti" />
-                  <div className={styles.categoryOverlay}>
-                    <h3>Cavallotti</h3>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-12 col-md-6">
-              <Link href="/catalogo/accessori-speciali">
-                <div className={styles.category}>
-                  <Image src={accessoriSpeciali} alt="Cavallotti" />
-                  <div className={styles.categoryOverlay}>
-                    <h3>Accessori Speciali</h3>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 }

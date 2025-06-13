@@ -1,9 +1,6 @@
 import Image from "next/image";
 import styles from "./footer.module.css";
 
-import partialLogo from "@/assets/logo-partial-white.svg";
-import instagramIcon from "@/assets/instagram.svg";
-
 import Link from "next/link";
 
 export default function Footer() {
@@ -16,10 +13,12 @@ export default function Footer() {
         <div className={`row ${styles.footerColumns} gap-5 gap-md-0`}>
           <div className="col-12 col-md-4">
             <Image
-              src={partialLogo}
-              alt="CMG BALDESSARELLI - Soluzioni per l'Agricoltura"
+              src="/images/logo-partial-white.svg"
+              alt="CMG BALDESSARELLI Logo"
+              width={70}
+              height={100}
             />
-            <div className={styles.footerAddress}>
+            <address className={styles.footerAddress}>
               <p>
                 <strong>CMG Baldessarelli</strong>
               </p>
@@ -28,24 +27,43 @@ export default function Footer() {
               <p>
                 <strong>P.IVA 02752280228</strong>
               </p>
-            </div>
+            </address>
           </div>
           <div className={`col-12 col-md-4 ${styles.centeredCol}`}>
-            <p>Links utili</p>
-            <div className={styles.footerLinks}>
-              <Link href="/">Home</Link>
-              <Link href="/catalogo">Catalogo Prodotti</Link>
-              <Link href="/#about">Chi Siamo</Link>
-              <Link href="/contatti">Contatti</Link>
-              <Link href="/#news">News</Link>
-              <Link href="/privacy-cookie">Privacy e Cookie Policy</Link>
-            </div>
+            <h2>Links utili</h2>
+            <ul className={styles.footerLinks}>
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              <li>
+                <Link href="/catalogo">Catalogo Prodotti</Link>
+              </li>
+              <li>
+                <Link href="/#about">Chi Siamo</Link>
+              </li>
+              <li>
+                <Link href="/contatti">Contatti</Link>
+              </li>
+              <li>
+                <Link href="/#news">News</Link>
+              </li>
+              <li>
+                <Link href="/privacy-cookie">Privacy e Cookie Policy</Link>
+              </li>
+            </ul>
           </div>
           <div className={`col-12 col-md-4 ${styles.centeredCol}`}>
-            <a href="https://www.instagram.com/cmg_baldessarelli" target="_blank">
+            <a
+              href="https://www.instagram.com/cmg_baldessarelli"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              aria-label="Visita la nostra pagina Instagram"
+            >
               <Image
-                src={instagramIcon}
-                alt="CMG BALDESSARELLI pagina Instagram"
+                src="/icons/instagram.svg"
+                width={48}
+                height={48}
+                alt=""
               />
             </a>
           </div>
@@ -53,7 +71,14 @@ export default function Footer() {
         <div className={styles.footerCopy}>
           <p>&copy; {currentYear} CMG Baldessarelli</p>
           <p>
-            Made by: <a href="https://fmwebagency.it">Francesco Merighi</a>
+            Made by:{" "}
+            <a
+              href="https://fmwebagency.it"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+            >
+              FM
+            </a>
           </p>
         </div>
       </div>

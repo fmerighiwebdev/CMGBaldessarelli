@@ -2,12 +2,14 @@ import Image from "next/image";
 
 import styles from "./privacy.module.css";
 
-import logoPartialBlack from "@/assets/logo-partial-black.svg";
-
 export const metadata = {
-  title: "Privacy e Cookie Policy - CMG BALDESSARELLI",
+  title: "Privacy e Cookie Policy",
   description:
     "Consulta la nostra Privacy e Cookie Policy per informazioni sul trattamento dei dati personali e sull'uso dei cookie su CMG Baldessarelli.",
+  robots: "noindex, follow",
+  alternates: {
+    canonical: "/privacy-cookie",
+  },
 };
 
 export default function PrivacyPage() {
@@ -16,11 +18,16 @@ export default function PrivacyPage() {
       <div className="container">
         <section>
           <div className={styles.privacyHeading}>
-            <Image src={logoPartialBlack} alt="CMG BALDESSARELLI Logo" />
+            <Image
+              src="/images/logo-partial-black.svg"
+              alt="CMG BALDESSARELLI Logo"
+              width={100}
+              height={50}
+            />
             <h1>Privacy e Cookie Policy</h1>
           </div>
           <div className={styles.privacyContent}>
-            <p>Ultimo aggiornamento: 15/12/2024</p>
+            <p>Ultimo aggiornamento: 13/06/2025</p>
             <div className={styles.privacyBlock}>
               <h2>1. Introduzione</h2>
               <p>
@@ -142,22 +149,38 @@ export default function PrivacyPage() {
               </p>
               <ul>
                 <li>
-                  <a href="https://support.google.com/chrome/answer/95647?hl=it">
+                  <a
+                    href="https://support.google.com/chrome/answer/95647?hl=it"
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                  >
                     Google Chrome
                   </a>
                 </li>
                 <li>
-                  <a href="https://support.mozilla.org/it/kb/Attivare%20e%20disattivare%20i%20cookie">
+                  <a
+                    href="https://support.mozilla.org/it/kb/Attivare%20e%20disattivare%20i%20cookie"
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                  >
                     Mozilla Firefox
                   </a>
                 </li>
                 <li>
-                  <a href="https://support.microsoft.com/it-it/help/17442/windows-internet-explorer-delete-manage-cookies">
+                  <a
+                    href="https://support.microsoft.com/it-it/help/17442/windows-internet-explorer-delete-manage-cookies"
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                  >
                     Microsoft Edge
                   </a>
                 </li>
                 <li>
-                  <a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac">
+                  <a
+                    href="https://support.apple.com/it-it/guide/safari/sfri11471/mac"
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                  >
                     Safari
                   </a>
                 </li>

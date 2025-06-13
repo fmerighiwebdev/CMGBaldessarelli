@@ -35,10 +35,23 @@
     margin-top: 3rem;
 }
 
+.productDescription {
+    font-size: clamp(1rem, 0.875rem + 0.476vw, 1.25rem);
+    color: var(--text-color);
+    text-align: center;
+}
+
 .productPageInfo table {
     width: min(100%, 750px);
     border-collapse: collapse;
     margin: 0 auto;
+}
+
+.productPageInfo table caption {
+    font-size: 0.875rem;
+    font-style: italic;
+    color: var(--text-color);
+    font-family: var(--body-font);
 }
 
 .productPageInfo th, .productPageInfo td {

@@ -31,9 +31,11 @@
     gap: 1rem;
 }
 
-.centeredCol p {
+.centeredCol h2 {
     text-transform: uppercase;
     font-weight: 500;
+    color: white;
+    font-size: clamp(1.125rem, 1.071rem + 0.19vw, 1.25rem);
 }
 
 .centeredCol img {
@@ -53,6 +55,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .footerLinks a {
@@ -82,6 +87,9 @@
 }
 
 @media screen and (max-width: 768px) {
+    .footerColumns {
+        margin: 0;
+    }
     .footerColumns div:first-child {
         display: flex;
         flex-direction: column;

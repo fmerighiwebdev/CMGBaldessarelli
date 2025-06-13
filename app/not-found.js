@@ -2,14 +2,15 @@ import Link from "next/link";
 import styles from "./page.module.css";
 
 export const metadata = {
-  title: "Pagina non trovata - CMG BALDESSARELLI",
+  title: "Pagina non trovata",
   description:
     "Oops! La pagina che stai cercando non esiste. Torna alla home del sito web.",
+  robots: "noindex, follow",
 };
 
 export default function NotFoundPage() {
   return (
-    <main className={styles.notFoundPage}>
+    <main id="main-content" className={styles.notFoundPage}>
       <section>
         <div className={styles.notFoundHeading}>
           <h1>404</h1>
