@@ -40,6 +40,7 @@ function ProductJsonLd({ product }) {
       name: "CMG Baldessarelli",
     },
     offers: {
+      price: 0,
       "@type": "Offer",
       url: `${siteUrl}/catalogo/${product.categorySlug}/${product.slug}`,
       priceCurrency: "EUR",
