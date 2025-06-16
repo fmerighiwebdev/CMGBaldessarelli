@@ -45,6 +45,7 @@ function BreadcrumbJsonLd() {
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    name: "Breadcrumb Contatti",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
       {

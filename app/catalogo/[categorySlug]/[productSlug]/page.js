@@ -54,6 +54,7 @@ function ProductJsonLd({ product }) {
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    name: `Breadcrumb Prodotto - ${product.name}`,
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
       {
