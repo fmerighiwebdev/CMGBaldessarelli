@@ -12,7 +12,7 @@ function OrganizationJsonLd() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "CMG di Baldessarelli",
+    name: "CMG Baldessarelli",
     url: siteUrl,
     logo: `${siteUrl}/images/logo-full-black.svg`,
     contactPoint: {
