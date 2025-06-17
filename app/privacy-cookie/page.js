@@ -60,6 +60,7 @@ export default function PrivacyPage() {
               <ul>
                 <li>Nome</li>
                 <li>Numero di telefono</li>
+                <li>Email</li>
               </ul>
             </div>
             <div className={styles.privacyBlock}>
