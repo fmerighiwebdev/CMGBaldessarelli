@@ -6,6 +6,7 @@ import styles from "./about.module.css";
 import { motion } from "framer-motion";
 
 import ImageSlideshow from "../image-slideshow/image-slideshow";
+import Link from "next/link";
 
 export default function About() {
   const aboutSections = [
@@ -77,7 +78,7 @@ export default function About() {
 
   return (
     <section className={styles.about} id="about">
-      <div className="container">
+      <div className={`container ${styles.aboutContainer}`}>
         <div className={styles.aboutContent}>
           {aboutSections.map((section, index) => (
             <div
@@ -108,6 +109,10 @@ export default function About() {
             </div>
           ))}
         </div>
+        <Link href="/docs/Catalogo_CMG_2026.pdf" target="_blank" rel="noopener noreferrer" className={styles.catalogButton}>
+          <Image src="/icons/pdf.svg" alt="Icona PDF" width={32} height={32} />
+          <span>Vedi il Catalogo</span>
+        </Link>
       </div>
     </section>
   );
