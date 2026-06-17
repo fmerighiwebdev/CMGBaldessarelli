@@ -15,7 +15,15 @@
 }
 
 .formGroupFlex input {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .formGroupFlex div {
@@ -42,6 +50,11 @@
 .formGroupFlex input:checked + label .customCheckbox {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
+}
+
+.formGroupFlex input:focus-visible + label .customCheckbox {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 3px;
 }
 
 .formGroupFlex input:checked + label .customCheckbox::after {

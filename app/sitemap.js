@@ -1,7 +1,8 @@
 import { products } from "../utils/products.js";
 import { news } from "../utils/news.js";
 
-const baseURL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.cmgbaldessarelli.com";
+const baseURL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.cmgbaldessarelli.com";
 
 const categories = [
   { slug: "tenditori" },
@@ -38,12 +39,6 @@ export default function sitemap() {
       changeFrequency: "yearly",
       lastModified: today,
       priority: 0.6,
-    },
-    {
-      url: `${baseURL}/privacy-cookie`,
-      changeFrequency: "yearly",
-      lastModified: today,
-      priority: 0.4,
     },
   ];
 

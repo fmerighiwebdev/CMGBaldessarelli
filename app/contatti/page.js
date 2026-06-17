@@ -1,7 +1,16 @@
 import Image from "next/image";
 
 import styles from "./contatti.module.css";
+import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import ContactForm from "@/components/contact-form/contact-form";
+import { products } from "@/utils/products";
+
+function getContactProductOptions() {
+  return products.map((product) => ({
+    name: product.name,
+    articles: product.informations?.articles || [],
+  }));
+}
 
 function LocalBusinessJsonLd() {
   const siteUrl =
@@ -13,7 +22,7 @@ function LocalBusinessJsonLd() {
     description:
       "Vendita di accessori per il vigneto e soluzioni per l'agricoltura a Villa Lagarina (TN).",
     url: siteUrl,
-    logo: `${siteUrl}/images/cmg-logo-full-black.svg`,
+    logo: `${siteUrl}/images/logo-full-black.svg`,
     sameAs: ["https://www.instagram.com/cmg_baldessarelli"],
     telephone: "+393450219562",
     email: "info@cmgbaldessarelli.it",
@@ -81,7 +90,12 @@ export default function Contatti() {
       <main id="main-content" className={styles.contactsPage}>
         <section>
           <div className={styles.contactsHeading}>
-            <h1>Contatti</h1>
+            <div className="container">
+              <h1>Contatti</h1>
+                <Breadcrumbs
+                  items={[{ label: "Home", href: "/" }, { label: "Contatti" }]}
+                />
+            </div>
           </div>
           <div className={styles.contactsContent}>
             <div className="container">
@@ -130,7 +144,7 @@ export default function Contatti() {
                   </div>
                 </div>
                 <div className="col-12 col-md-6">
-                  <ContactForm />
+                  <ContactForm productOptions={getContactProductOptions()} />
                 </div>
               </div>
             </div>

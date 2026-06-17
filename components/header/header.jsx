@@ -27,7 +27,7 @@ export default function Header() {
       ],
     },
     { label: "Contatti", href: "/contatti" },
-    { label: "News", href: "/#news" },
+    { label: "News", href: "/news" },
   ];
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -46,7 +46,7 @@ export default function Header() {
     if (isMenuOpen) {
       setIsMenuOpen(false);
     }
-  }, [pathname]);
+  }, [pathname, isMenuOpen]);
 
   return (
     <header

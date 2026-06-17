@@ -5,6 +5,14 @@
     gap: 1rem;
 }
 
+.honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
 .contactsForm button {
     background-color: var(--primary-color);
     color: var(--white);

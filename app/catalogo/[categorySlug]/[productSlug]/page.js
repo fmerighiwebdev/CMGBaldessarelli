@@ -1,9 +1,11 @@
-import styles from "./product-page.module.css";
-
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import { getCategoryName } from "@/utils/categories";
 import { products } from "@/utils/products";
+import styles from "./product-page.module.css";
 
 export async function generateStaticParams() {
   return products.map((product) => ({
@@ -12,43 +14,36 @@ export async function generateStaticParams() {
   }));
 }
 
-function getProductData(productSlug) {
-  const product = products.find((p) => p.slug === productSlug);
+function getProductData(categorySlug, productSlug) {
+  const product = products.find(
+    (p) => p.categorySlug === categorySlug && p.slug === productSlug
+  );
   if (!product) {
     notFound();
   }
   return product;
 }
 
+function getImageUrl(siteUrl, image) {
+  return `${siteUrl}${image.src || image}`;
+}
+
 function ProductJsonLd({ product }) {
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL || "https://www.cmgbaldessarelli.com";
 
-  const categoryName = product.categorySlug
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (char) => char.toUpperCase());
+  const categoryName = getCategoryName(product.categorySlug);
 
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: product.images.map((img) => `${siteUrl}${img.src}`),
+    image: product.images.map((image) => getImageUrl(siteUrl, image)),
     sku: product.informations.articles.map((a) => a.code).join("-"),
     brand: {
       "@type": "Brand",
       name: "CMG Baldessarelli",
-    },
-    offers: {
-      price: 0,
-      "@type": "Offer",
-      url: `${siteUrl}/catalogo/${product.categorySlug}/${product.slug}`,
-      priceCurrency: "EUR",
-      availability: "https://schema.org/InStock",
-      seller: {
-        "@type": "Organization",
-        name: "CMG Baldessarelli",
-      },
     },
   };
 
@@ -90,12 +85,13 @@ function ProductJsonLd({ product }) {
 }
 
 export async function generateMetadata({ params }) {
-  const product = getProductData(params.productSlug);
+  const { categorySlug, productSlug } = await params;
+  const product = getProductData(categorySlug, productSlug);
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL || "https://www.cmgbaldessarelli.com";
   const pageUrl = `/catalogo/${product.categorySlug}/${product.slug}`;
   const imageUrl = product.images[0]
-    ? `${siteUrl}${product.images[0].src}`
+    ? getImageUrl(siteUrl, product.images[0])
     : null;
 
   return {
@@ -120,7 +116,16 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ProductPage({ params }) {
-  const product = getProductData(params.productSlug);
+  const { categorySlug, productSlug } = await params;
+  const product = getProductData(categorySlug, productSlug);
+  const categoryName = getCategoryName(product.categorySlug);
+  const relatedProducts = products
+    .filter(
+      (relatedProduct) =>
+        relatedProduct.categorySlug === product.categorySlug &&
+        relatedProduct.slug !== product.slug
+    )
+    .slice(0, 4);
 
   return (
     <>
@@ -133,6 +138,19 @@ export default async function ProductPage({ params }) {
             </div>
           </div>
           <div className={styles.productPageContent}>
+            <div className="container">
+              <Breadcrumbs
+                items={[
+                  { label: "Home", href: "/" },
+                  { label: "Catalogo", href: "/catalogo" },
+                  {
+                    label: categoryName,
+                    href: `/catalogo/${product.categorySlug}`,
+                  },
+                  { label: product.name },
+                ]}
+              />
+            </div>
             <div className={`${styles.hiddenOnMobile} container`}>
               <div className={styles.productPageImages}>
                 {product.images.map((image, index) => (
@@ -171,6 +189,36 @@ export default async function ProductPage({ params }) {
                       ))}
                     </tbody>
                   </table>
+                )}
+                <div className={styles.productActions}>
+                  <Link href="/contatti" className={styles.primaryAction}>
+                    Richiedi informazioni
+                  </Link>
+                  <Link
+                    href={`/catalogo/${product.categorySlug}`}
+                    className={styles.secondaryAction}
+                  >
+                    Vedi altri prodotti in {categoryName}
+                  </Link>
+                </div>
+                {relatedProducts.length > 0 && (
+                  <nav
+                    className={styles.relatedProducts}
+                    aria-label={`Altri prodotti in ${categoryName}`}
+                  >
+                    <h2>Prodotti correlati</h2>
+                    <ul>
+                      {relatedProducts.map((relatedProduct) => (
+                        <li key={relatedProduct.slug}>
+                          <Link
+                            href={`/catalogo/${relatedProduct.categorySlug}/${relatedProduct.slug}`}
+                          >
+                            {relatedProduct.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
                 )}
               </div>
             </div>

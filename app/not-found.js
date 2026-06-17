@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import styles from "./page.module.css";
 
 export const metadata = {
@@ -12,6 +13,12 @@ export default function NotFoundPage() {
   return (
     <main id="main-content" className={styles.notFoundPage}>
       <section>
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Pagina non trovata" },
+          ]}
+        />
         <div className={styles.notFoundHeading}>
           <h1>404</h1>
         </div>

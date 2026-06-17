@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import styles from "./privacy.module.css";
 
 export const metadata = {
@@ -17,6 +18,12 @@ export default function PrivacyPage() {
     <main className={styles.privacyPage}>
       <div className="container">
         <section>
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Privacy e Cookie Policy" },
+            ]}
+          />
           <div className={styles.privacyHeading}>
             <Image
               src="/images/logo-partial-black.svg"

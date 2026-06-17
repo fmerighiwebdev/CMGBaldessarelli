@@ -1,5 +1,7 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import styles from "./newsPage.module.css";
+import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import { news } from "@/utils/news";
 
 export async function generateStaticParams() {
@@ -86,7 +88,8 @@ function BreadcrumbJsonLd({ newsItem }) {
 }
 
 export async function generateMetadata({ params }) {
-  const newsItem = getNewsData(params.newsSlug);
+  const { newsSlug } = await params;
+  const newsItem = getNewsData(newsSlug);
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL || "https://www.cmgbaldessarelli.com";
   const imageUrl = newsItem.images[0]
@@ -94,7 +97,7 @@ export async function generateMetadata({ params }) {
     : null;
 
   return {
-    title: `${newsItem.title} | CMG Baldessarelli News`,
+    title: `${newsItem.title}`,
     description: newsItem.description,
     alternates: {
       canonical: `/news/${newsItem.slug}`,
@@ -113,7 +116,8 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function NewsPage({ params }) {
-  const currentNews = getNewsData(params.newsSlug);
+  const { newsSlug } = await params;
+  const currentNews = getNewsData(newsSlug);
 
   return (
     <>
@@ -127,6 +131,13 @@ export default async function NewsPage({ params }) {
             </div>
           </div>
           <div className="container">
+            <Breadcrumbs
+              items={[
+                { label: "Home", href: "/" },
+                { label: "News", href: "/news" },
+                { label: currentNews.title },
+              ]}
+            />
             <p className={styles.newsDescription}>{currentNews.description}</p>
             {currentNews.images.length > 0 && (
               <div className={styles.newsImagesContainer}>

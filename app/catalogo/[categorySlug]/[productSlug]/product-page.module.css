@@ -80,6 +80,81 @@
     font-size: clamp(1.25rem, 1.157rem + 0.381vw, 1.5rem);
 }
 
+.productActions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.primaryAction,
+.secondaryAction {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.75rem 1.25rem;
+    font-family: var(--body-font);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.primaryAction {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.primaryAction:hover,
+.primaryAction:focus-visible {
+    background-color: var(--secondary-color);
+}
+
+.secondaryAction {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.secondaryAction:hover,
+.secondaryAction:focus-visible {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.relatedProducts {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.relatedProducts h2 {
+    color: var(--text-color);
+    font-size: clamp(1.5rem, 1.329rem + 0.19vw, 1.75rem);
+    margin: 0 0 1rem;
+    text-transform: uppercase;
+}
+
+.relatedProducts ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.relatedProducts a {
+    color: var(--primary-color);
+    font-family: var(--body-font);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.relatedProducts a:hover,
+.relatedProducts a:focus-visible {
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 768px) {
     .productPageImages {
         flex-direction: column;

@@ -1,7 +1,9 @@
 import Image from "next/image";
-import styles from "./catalogo.module.css";
-
 import Link from "next/link";
+
+import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import { categories } from "@/utils/categories";
+import styles from "./catalogo.module.css";
 
 function BreadcrumbJsonLd() {
   const pageUrl = "/catalogo";
@@ -38,8 +40,6 @@ function BreadcrumbJsonLd() {
 
 export async function generateMetadata() {
   const pageUrl = "/catalogo";
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.cmgbaldessarelli.com";
   const title = "Catalogo Prodotti";
   const description =
     "Esplora il nostro catalogo di accessori per vigneti. Scopri tenditori, collari, cavallotti e prodotti innovativi per la viticoltura.";
@@ -54,45 +54,6 @@ export async function generateMetadata() {
 }
 
 export default function Catalogo() {
-  const categories = [
-    {
-      name: "Tenditori",
-      slug: "tenditori",
-      image: "/images/category/tenditori.webp",
-      alt: "Tenditori professionali per fili da vigneto",
-    },
-    {
-      name: "Accessori di Testata",
-      slug: "accessori-di-testata",
-      image: "/images/category/accessori-di-testata.webp",
-      alt: "Accessori di testata per pali da vigna",
-    },
-    {
-      name: "Collari di Testata",
-      slug: "collari-di-testata",
-      image: "/images/category/collari-di-testata.webp",
-      alt: "Collari di testata per la massima stabilità",
-    },
-    {
-      name: "Collari Intermedi",
-      slug: "collari-intermedi",
-      image: "/images/category/collari-intermedi.webp",
-      alt: "Collari intermedi per pali da vigneto",
-    },
-    {
-      name: "Cavallotti",
-      slug: "cavallotti",
-      image: "/images/category/cavallotti.webp",
-      alt: "Cavallotti e ganci per fili agricoli",
-    },
-    {
-      name: "Accessori Speciali",
-      slug: "accessori-speciali",
-      image: "/images/category/accessori-speciali.webp",
-      alt: "Accessori speciali e su misura per vigneto",
-    },
-  ];
-
   return (
     <>
       <BreadcrumbJsonLd />
@@ -124,6 +85,15 @@ export default function Catalogo() {
         </section>
         <section id="categorie" className={styles.catalogoCategories}>
           <div className="container">
+            <Breadcrumbs
+              items={[{ label: "Home", href: "/" }, { label: "Catalogo" }]}
+            />
+            <div className={styles.catalogoIntro}>
+              <p>
+                Seleziona la categoria piu adatta al tuo impianto: tenditori,
+                collari, cavallotti e accessori speciali.
+              </p>
+            </div>
             <div className="row g-4">
               {categories.map((category) => (
                 <div key={category.slug} className="col-12 col-md-6">
@@ -146,6 +116,9 @@ export default function Catalogo() {
                 </div>
               ))}
             </div>
+            <Link href="/contatti" className={styles.catalogoCta}>
+              Richiedi informazioni
+            </Link>
           </div>
         </section>
       </main>

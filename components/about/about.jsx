@@ -1,9 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import styles from "./about.module.css";
-
-import { motion } from "framer-motion";
 
 import ImageSlideshow from "../image-slideshow/image-slideshow";
 import Link from "next/link";
@@ -67,15 +63,6 @@ export default function About() {
     },
   ];
 
-  const animationVariants = {
-    hidden: { x: -50, opacity: 0 },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
   return (
     <section className={styles.about} id="about">
       <div className={`container ${styles.aboutContainer}`}>
@@ -85,27 +72,19 @@ export default function About() {
               key={index}
               className={`row ${styles.aboutColumns} gap-3 gap-md-0 align-items-center`}
             >
-              <motion.div
+              <div
                 className={`col-12 col-md-6 ${
                   section.imageOrder === "order-md-1" ? "order-0" : "order-1"
                 }`}
-                variants={animationVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
               >
                 <h2>{section.title}</h2>
                 <p>{section.content}</p>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={`col-12 col-md-6 ${section.imageOrder}`}
-                variants={animationVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
               >
                 {section.imageComponent}
-              </motion.div>
+              </div>
             </div>
           ))}
         </div>

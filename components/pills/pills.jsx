@@ -1,8 +1,4 @@
-"use client";
-
 import styles from "./pills.module.css";
-
-import { motion } from "framer-motion";
 
 import Image from "next/image";
 
@@ -32,41 +28,17 @@ export default function Pills() {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const pillVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeInOut" },
-    },
-  };
-
   return (
     <section className={styles.pills}>
       <div className="container">
         <h2 className="visuallyHidden">I Nostri Punti di Forza</h2>
-        <motion.div
+        <div
           className={`${styles.pillsColumns} row gap-5 gap-md-0`}
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
         >
           {pillsData.map((pill, index) => (
-            <motion.div
+            <div
               key={index}
               className={`col-12 col-md-6 col-lg-3 ${pill.className || ""}`}
-              variants={pillVariants}
             >
               <div className={styles.pill}>
                 <Image
@@ -78,9 +50,9 @@ export default function Pills() {
                 <h3>{pill.title}</h3>
                 <p>{pill.text}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
