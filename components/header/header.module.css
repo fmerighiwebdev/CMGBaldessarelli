@@ -66,6 +66,16 @@
   color: var(--hover-color);
 }
 
+.logoLink:focus-visible,
+.dropdownButton:focus-visible,
+.desktopMenu a:focus-visible,
+.hamburger:focus-visible,
+.mobileMenu a:focus-visible,
+.mobileMenu summary:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 4px;
+}
+
 /* NUOVO: Stile per la pagina attiva (accessibilità) */
 .desktopMenu a[aria-current="page"] {
   color: var(--hover-color);

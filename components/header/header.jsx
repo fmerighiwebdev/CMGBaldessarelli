@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import styles from "./header.module.css";
@@ -33,8 +33,17 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const mobileMenuButtonRef = useRef(null);
 
   const pathname = usePathname();
+
+  function handleMobileMenuToggle() {
+    setIsMenuOpen((isOpen) => !isOpen);
+  }
+
+  function handleMobileMenuClose() {
+    setIsMenuOpen(false);
+  }
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 100);
@@ -43,10 +52,25 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    if (isMenuOpen) {
-      setIsMenuOpen(false);
+    setIsMenuOpen(false);
+    setIsDropdownOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
     }
-  }, [pathname, isMenuOpen]);
+
+    function handleEscape(event) {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+        mobileMenuButtonRef.current?.focus();
+      }
+    }
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [isMenuOpen]);
 
   return (
     <header
@@ -127,8 +151,9 @@ export default function Header() {
           </ul>
 
           <button
+            ref={mobileMenuButtonRef}
             className={`${styles.hamburger} ${isMenuOpen ? styles.isOpen : ""}`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={handleMobileMenuToggle}
             aria-label={isMenuOpen ? "Chiudi menu" : "Apri menu"}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
@@ -160,7 +185,10 @@ export default function Header() {
                           <li key={sublink.href}>
                             <Link
                               href={sublink.href}
-                              onClick={() => setIsMenuOpen(false)}
+                              onClick={handleMobileMenuClose}
+                              aria-current={
+                                pathname === sublink.href ? "page" : undefined
+                              }
                             >
                               {sublink.label}
                             </Link>
@@ -169,7 +197,13 @@ export default function Header() {
                       </ul>
                     </details>
                   ) : (
-                    <Link href={link.href} onClick={() => setIsMenuOpen(false)}>
+                    <Link
+                      href={link.href}
+                      onClick={handleMobileMenuClose}
+                      aria-current={
+                        pathname === link.href ? "page" : undefined
+                      }
+                    >
                       {link.label}
                     </Link>
                   )}

@@ -90,10 +90,11 @@ export default function NewsIndexPage() {
                     <Link href={`/news/${newsItem.slug}`}>
                       {newsItem.images[0] && (
                         <Image
-                          src={newsItem.images[0]}
-                          alt={newsItem.alt}
-                          width={600}
-                          height={400}
+                          src={newsItem.images[0].src}
+                          alt={newsItem.images[0].alt}
+                          width={newsItem.images[0].width}
+                          height={newsItem.images[0].height}
+                          sizes="(max-width: 768px) calc(100vw - 2rem), 400px"
                         />
                       )}
                       <div className={styles.newsInfo}>

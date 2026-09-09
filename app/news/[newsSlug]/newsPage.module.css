@@ -17,15 +17,78 @@
     animation: fadeInFromTop .75s ease-in-out forwards;
 }
 
-.newsDescription {
+.newsContent {
     margin: 3rem auto;
-    text-align: center;
     width: min(100%, 800px);
     font-size: clamp(1rem, 0.954rem + 0.19vw, 1.125rem);
+    line-height: 1.7;
     color: var(--text-color);
 }
 
+.newsContent > :first-child {
+    margin-top: 0;
+}
+
+.newsContent > :last-child {
+    margin-bottom: 0;
+}
+
+.newsContent p {
+    margin: 0 0 1.5rem;
+}
+
+.newsContent h2,
+.newsContent h3 {
+    line-height: 1.25;
+    margin: 2.5rem 0 1rem;
+}
+
+.newsContent h2 {
+    font-size: clamp(1.5rem, 1.361rem + 0.59vw, 1.875rem);
+}
+
+.newsContent h3 {
+    font-size: clamp(1.25rem, 1.157rem + 0.39vw, 1.5rem);
+}
+
+.newsContent ul,
+.newsContent ol {
+    margin: 0 0 1.5rem;
+    padding-inline-start: 1.5rem;
+}
+
+.newsContent li + li {
+    margin-top: 0.5rem;
+}
+
+.newsContent strong {
+    font-weight: 700;
+}
+
+.newsContent a {
+    color: var(--primary-color);
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.2em;
+}
+
+.newsContent a:hover {
+    text-decoration-thickness: 0.15em;
+}
+
+.newsContent a:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+.newsImagesContainer {
+    display: grid;
+    gap: 2rem;
+    margin: 0 auto;
+    width: min(100%, 800px);
+}
+
 .newsImagesContainer img {
+    display: block;
     width: 100%;
     height: auto;
     object-fit: cover;

@@ -26,20 +26,22 @@ export default function News() {
                   <h3>{newsItem.title}</h3>
                   <p>{newsItem.short_description}</p>
                   <div className={styles.newsLinks}>
-                    <a
-                      href={newsItem.ig_link}
-                      target="_blank"
-                      rel="nofollow noopener noreferrer"
-                      aria-label={`Guarda il video di "${newsItem.title}" su Instagram`}
-                    >
-                      Guarda il video
-                      <Image
-                        src="/icons/link-out.svg"
-                        alt=""
-                        width={16}
-                        height={16}
-                      />
-                    </a>
+                    {newsItem.ig_link && (
+                      <a
+                        href={newsItem.ig_link}
+                        target="_blank"
+                        rel="nofollow noopener noreferrer"
+                        aria-label={`Guarda il video di "${newsItem.title}" su Instagram`}
+                      >
+                        Guarda il video
+                        <Image
+                          src="/icons/link-out.svg"
+                          alt=""
+                          width={16}
+                          height={16}
+                        />
+                      </a>
+                    )}
                     <Link
                       href={`/news/${newsItem.slug}`}
                       aria-label={`Leggi la notizia completa su "${newsItem.title}"`}
