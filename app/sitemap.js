@@ -14,30 +14,25 @@ const categories = [
 ];
 
 export default function sitemap() {
-  const today = new Date().toISOString().split("T")[0];
   const staticRoutes = [
     {
       url: `${baseURL}/`,
       changeFrequency: "yearly",
-      lastModified: today,
       priority: 1,
     },
     {
       url: `${baseURL}/catalogo`,
       changeFrequency: "monthly",
-      lastModified: today,
       priority: 0.8,
     },
     {
       url: `${baseURL}/news`,
       changeFrequency: "weekly",
-      lastModified: today,
       priority: 0.8,
     },
     {
       url: `${baseURL}/contatti`,
       changeFrequency: "yearly",
-      lastModified: today,
       priority: 0.6,
     },
   ];
@@ -45,20 +40,17 @@ export default function sitemap() {
   const categoryRoutes = categories.map((category) => ({
     url: `${baseURL}/catalogo/${category.slug}`,
     changeFrequency: "yearly",
-    lastModified: today,
     priority: 0.7,
   }));
 
   const productRoutes = products.map((product) => ({
     url: `${baseURL}/catalogo/${product.categorySlug}/${product.slug}`,
-    lastModified: product.lastModified,
     changeFrequency: "monthly",
     priority: 0.9,
   }));
 
   const newsRoutes = news.map((newsItem) => ({
     url: `${baseURL}/news/${newsItem.slug}`,
-    lastModified: newsItem.published_at,
     changeFrequency: "yearly",
     priority: 0.9,
   }));

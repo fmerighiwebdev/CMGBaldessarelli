@@ -7,12 +7,17 @@
 }
 
 .privacyPage a {
-    color: var(--primary-color);
+    color: var(--accent-text-color);
     text-decoration: none;
 }
 
 .privacyPage a:hover {
     text-decoration: underline;
+}
+
+.privacyPage a:focus-visible {
+    outline: 3px solid var(--focus-indicator-color);
+    outline-offset: 3px;
 }
 
 .privacyPage ul {

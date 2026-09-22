@@ -11,9 +11,22 @@
   --white: #fff;
   --bg-color: #f5f5f5;
   --text-color: #424242;
-  --text-color-light: #a8a8a8;
-  --primary-color: #4caf50;
-  --hover-color: #2e7d32;
+  --muted-text-color: #666;
+  --brand-color: #4caf50;
+  --brand-surface-color: #2e7d32;
+  --text-on-brand-color: #000;
+  --accent-text-color: #2e7d32;
+  --accent-text-on-dark-color: #81c784;
+  --filled-control-background: #2e7d32;
+  --filled-control-background-hover: #1b5e20;
+  --control-border-color: #767676;
+  --accent-border-color: #2e7d32;
+  --focus-indicator-color: #1b5e20;
+  --focus-indicator-on-dark-color: #fff;
+  --error-text-color: #b00020;
+  --error-background-color: #b00020;
+  --error-surface-color: #ffe7ec;
+  --success-background-color: #2e7d32;
 
   --heading-font: "Lato", sans-serif;
   --body-font: "Raleway", sans-serif;
@@ -69,16 +82,16 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color);
+  background-color: var(--brand-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--hover-color);
+  background-color: var(--brand-surface-color);
 }
 
 ::selection {
-  background: var(--primary-color);
-  color: var(--white);
+  background: var(--brand-color);
+  color: var(--text-on-brand-color);
 }
 
 .visuallyHidden {

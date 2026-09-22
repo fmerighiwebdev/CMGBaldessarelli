@@ -12,25 +12,30 @@
 }
 
 .breadcrumbs li {
-  color: var(--text-color-light);
+  color: var(--muted-text-color);
   font-family: var(--body-font);
   font-size: 0.95rem;
 }
 
 .breadcrumbs li:not(:last-child)::after {
   content: "/";
-  color: var(--primary-color);
+  color: var(--accent-text-color);
   margin-left: 0.5rem;
 }
 
 .breadcrumbs a {
-  color: var(--primary-color);
+  color: var(--accent-text-color);
   font-weight: 600;
   text-decoration: none;
 }
 
 .breadcrumbs a:hover {
   text-decoration: underline;
+}
+
+.breadcrumbs a:focus-visible {
+  outline: 3px solid var(--focus-indicator-color);
+  outline-offset: 3px;
 }
 
 .breadcrumbs span {

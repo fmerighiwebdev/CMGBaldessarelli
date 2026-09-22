@@ -15,7 +15,7 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className={styles.privacyPage}>
+    <main id="main-content" className={styles.privacyPage}>
       <div className="container">
         <section>
           <Breadcrumbs

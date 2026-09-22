@@ -33,6 +33,7 @@ function ProductJsonLd({ product }) {
     process.env.NEXT_PUBLIC_SITE_URL || "https://www.cmgbaldessarelli.com";
 
   const categoryName = getCategoryName(product.categorySlug);
+  const articles = product.informations?.articles ?? [];
 
   const productSchema = {
     "@context": "https://schema.org",
@@ -40,7 +41,7 @@ function ProductJsonLd({ product }) {
     name: product.name,
     description: product.description,
     image: product.images.map((image) => getImageUrl(siteUrl, image)),
-    sku: product.informations.articles.map((a) => a.code).join("-"),
+    ...(articles.length === 1 ? { sku: articles[0].code } : {}),
     brand: {
       "@type": "Brand",
       name: "CMG Baldessarelli",
@@ -130,7 +131,7 @@ export default async function ProductPage({ params }) {
   return (
     <>
       <ProductJsonLd product={product} />
-      <main className={styles.productPage}>
+      <main id="main-content" className={styles.productPage}>
         <section>
           <div className={styles.productPageHeading}>
             <div className="container">

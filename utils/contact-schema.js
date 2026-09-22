@@ -1,15 +1,23 @@
 import * as z from "zod";
 
+export const normalizePhoneNumber = (value) => {
+  if (typeof value !== "string") {
+    return value;
+  }
+
+  return value.replace(/\s+/g, "").replace(/^\+39/, "");
+};
+
 export const contactSchema = z.object({
   name: z
     .string()
     .trim()
     .min(2, "Il nome deve contenere almeno 2 caratteri.")
     .max(120, "Il nome è troppo lungo."),
-  phone: z
-    .string()
-    .trim()
-    .regex(/^\d{10,15}$/, "Inserisci un numero di telefono valido."),
+  phone: z.preprocess(
+    normalizePhoneNumber,
+    z.string().regex(/^\d{10,15}$/, "Inserisci un numero di telefono valido.")
+  ),
   email: z
     .string()
     .trim()

@@ -1,6 +1,6 @@
 .pills {
     padding-block: 7rem;
-    background-color: var(--primary-color);
+    background-color: var(--brand-surface-color);
 }
 
 .pill {

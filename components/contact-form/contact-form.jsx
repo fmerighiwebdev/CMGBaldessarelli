@@ -96,6 +96,7 @@ export default function ContactForm({ productOptions }) {
           label="Nome e cognome"
           type="text"
           id="name"
+          autoComplete="name"
           required
           aria-invalid={!!errors.name}
           aria-describedby="name-error"
@@ -114,12 +115,18 @@ export default function ContactForm({ productOptions }) {
             label="Telefono"
             type="tel"
             id="phone"
+            autoComplete="tel"
             required
             aria-invalid={!!errors.phone}
-            aria-describedby="phone-error"
+            aria-describedby={
+              errors.phone ? "phone-hint phone-error" : "phone-hint"
+            }
             {...register("phone")}
             error={errors.phone?.message}
           />
+          <p id="phone-hint" className={styles.hint}>
+            Inserisci da 10 a 15 cifre. Puoi usare spazi e il prefisso +39.
+          </p>
           {errors.phone && (
             <p id="phone-error" className={styles.error}>
               {errors.phone.message}
@@ -131,6 +138,7 @@ export default function ContactForm({ productOptions }) {
             label="Email"
             type="email"
             id="email"
+            autoComplete="email"
             required
             aria-invalid={!!errors.email}
             aria-describedby="email-error"

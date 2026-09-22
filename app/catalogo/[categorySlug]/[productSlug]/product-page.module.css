@@ -56,12 +56,12 @@
 
 .productPageInfo th, .productPageInfo td {
     padding: 1rem;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--control-border-color);
     text-align: center;
 }
 
 .productPageInfo th {
-    background-color: var(--primary-color);
+    background-color: var(--brand-surface-color);
     color: var(--white);
     text-transform: uppercase;
 }
@@ -70,7 +70,7 @@
     margin: 0;
     text-align: center;
     font-style: italic;
-    background-color: var(--primary-color);
+    background-color: var(--brand-surface-color);
     color: var(--white);
     padding: 1rem;
 }
@@ -101,23 +101,23 @@
 }
 
 .primaryAction {
-    background-color: var(--primary-color);
+    background-color: var(--filled-control-background);
     color: var(--white);
 }
 
 .primaryAction:hover,
 .primaryAction:focus-visible {
-    background-color: var(--secondary-color);
+    background-color: var(--filled-control-background-hover);
 }
 
 .secondaryAction {
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
+    border: 1px solid var(--accent-border-color);
+    color: var(--accent-text-color);
 }
 
 .secondaryAction:hover,
 .secondaryAction:focus-visible {
-    background-color: var(--primary-color);
+    background-color: var(--filled-control-background);
     color: var(--white);
 }
 
@@ -144,7 +144,7 @@
 }
 
 .relatedProducts a {
-    color: var(--primary-color);
+    color: var(--accent-text-color);
     font-family: var(--body-font);
     font-weight: 700;
     text-decoration: none;
@@ -153,6 +153,13 @@
 .relatedProducts a:hover,
 .relatedProducts a:focus-visible {
     text-decoration: underline;
+}
+
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible,
+.relatedProducts a:focus-visible {
+    outline: 3px solid var(--focus-indicator-color);
+    outline-offset: 3px;
 }
 
 @media screen and (max-width: 768px) {

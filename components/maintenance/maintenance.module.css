@@ -19,7 +19,7 @@
 
 .maintenanceContent h2 {
     font-size: 1.5rem;
-    color: var(--primary-color);
+    color: var(--accent-text-on-dark-color);
     font-weight: 700;
 }
 
@@ -56,8 +56,8 @@
 }
 
 .maintenanceContacts a {
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+    color: var(--accent-text-on-dark-color);
+    border: 1px solid var(--accent-text-on-dark-color);
     padding: .5rem 1rem;
     text-align: center;
     width: 300px;
@@ -74,4 +74,9 @@
 .maintenanceContacts a img {
     width: 20px;
     height: auto;
+}
+
+.maintenanceContacts a:focus-visible {
+    outline: 3px solid var(--focus-indicator-on-dark-color);
+    outline-offset: 3px;
 }

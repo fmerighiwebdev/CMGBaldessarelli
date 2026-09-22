@@ -11,7 +11,7 @@
 }
 
 .about span {
-    color: var(--primary-color);
+    color: var(--accent-text-color);
 }
 
 .aboutContainer {
@@ -54,7 +54,7 @@
 }
 
 .aboutCta a:first-child {
-    background-color: var(--primary-color);
+    background-color: var(--filled-control-background);
     font-size: 1.25rem;
     color: var(--white);
     text-transform: uppercase;
@@ -65,14 +65,14 @@
 }
 
 .aboutCta a:first-child:hover {
-    background-color: var(--hover-color);
+    background-color: var(--filled-control-background-hover);
 }
 
 .aboutCta a:last-child {
     background-color: var(--white);
     font-size: 1.25rem;
     padding: .75rem 0;
-    color: var(--primary-color);
+    color: var(--accent-text-color);
     font-weight: 600;
     text-align: center;
     text-decoration: none;
@@ -107,15 +107,21 @@
     text-decoration: none;
     transition: all 0.2s;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    background-color: var(--primary-color);
+    background-color: var(--filled-control-background);
     color: white;
 }
 
 .catalogButton:hover {
-    background-color: var(--hover-color);
+    background-color: var(--filled-control-background-hover);
     color: white;
 }
 
 .catalogButton span {
     color: white;
+}
+
+.aboutCta a:focus-visible,
+.catalogButton:focus-visible {
+    outline: 3px solid var(--focus-indicator-color);
+    outline-offset: 3px;
 }

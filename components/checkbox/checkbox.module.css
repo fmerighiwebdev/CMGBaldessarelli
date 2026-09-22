@@ -10,7 +10,7 @@
 }
 
 .formGroupFlex label span {
-  color: rgb(255, 82, 82);
+  color: var(--error-text-color);
   font-size: 1rem;
 }
 
@@ -40,7 +40,7 @@
 .customCheckbox {
   width: 20px;
   height: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--control-border-color);
   border-radius: 0;
   display: inline-block;
   position: relative;
@@ -48,12 +48,12 @@
 }
 
 .formGroupFlex input:checked + label .customCheckbox {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+  background-color: var(--filled-control-background);
+  border-color: var(--filled-control-background);
 }
 
 .formGroupFlex input:focus-visible + label .customCheckbox {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--focus-indicator-color);
   outline-offset: 3px;
 }
 
@@ -70,5 +70,5 @@
 }
 
 .formGroupFlex label:hover .customCheckbox {
-  border-color: var(--primary-color);
+  border-color: var(--accent-border-color);
 }

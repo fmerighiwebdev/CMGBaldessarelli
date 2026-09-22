@@ -117,7 +117,7 @@ export default async function CategoryPage({ params }) {
         categorySlug={categorySlug}
         categoryName={categoryName}
       />
-      <main className={styles.categoryPage}>
+      <main id="main-content" className={styles.categoryPage}>
         <section>
           <div className={styles.catalogoHeading}>
             <div className="container">

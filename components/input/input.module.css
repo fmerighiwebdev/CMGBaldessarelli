@@ -6,7 +6,7 @@
 }
 
 .formGroup label span {
-    color: rgb(255, 82, 82);
+    color: var(--error-text-color);
 }
 
 .formGroup input, .formGroup textarea {
@@ -14,15 +14,16 @@
     padding: .5rem;
     background-color: white;
     color: var(--text-color);
-    border: 1px solid #ccc;
+    border: 1px solid var(--control-border-color);
     transition: all .2s;
     border-radius: 0;
     font-family: var(--body-font);
 }
 
 .formGroup input:focus, .formGroup textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
+    border-color: var(--focus-indicator-color);
+    outline: 2px solid var(--focus-indicator-color);
+    outline-offset: 2px;
 }
 
 .formGroup textarea {
@@ -31,6 +32,6 @@
 }
 
 .errorInput {
-    border: 1px solid rgb(255, 82, 82) !important;
-    background-color: rgba(255, 95, 95, 0.2);
+    border: 1px solid var(--error-text-color) !important;
+    background-color: var(--error-surface-color);
 }

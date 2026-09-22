@@ -66,7 +66,7 @@
 }
 
 .newsContent a {
-    color: var(--primary-color);
+    color: var(--accent-text-color);
     text-decoration-thickness: 0.1em;
     text-underline-offset: 0.2em;
 }
@@ -76,7 +76,7 @@
 }
 
 .newsContent a:focus-visible {
-    outline: 3px solid var(--primary-color);
+    outline: 3px solid var(--focus-indicator-color);
     outline-offset: 3px;
 }
 

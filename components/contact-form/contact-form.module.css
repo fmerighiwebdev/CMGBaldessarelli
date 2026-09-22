@@ -14,7 +14,7 @@
 }
 
 .contactsForm button {
-    background-color: var(--primary-color);
+    background-color: var(--filled-control-background);
     color: var(--white);
     font-family: var(--body-font);
     font-weight: 500;
@@ -43,23 +43,38 @@
     color: white;
     text-align: center;
     padding: 1rem;
-    background-color: rgb(255, 95, 95);
+    background-color: var(--error-background-color);
 }
 
 .error {
-    color: rgb(255, 82, 82);
+    color: var(--error-text-color);
     margin: 0;
+}
+
+.hint {
+    color: var(--text-color);
+    margin: .375rem 0 0;
+    font-size: .875rem;
 }
 
 .success {
     color: white;
     text-align: center;
     padding: 1rem;
-    background-color: var(--primary-color);
+    background-color: var(--success-background-color);
 }
 
 @media screen and (max-width: 576px) {
     .flexGroup {
         flex-direction: column;
     }
+}
+
+.contactsForm button:hover {
+    background-color: var(--filled-control-background-hover);
+}
+
+.contactsForm button:focus-visible {
+    outline: 3px solid var(--focus-indicator-color);
+    outline-offset: 3px;
 }

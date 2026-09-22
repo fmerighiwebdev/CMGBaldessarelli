@@ -66,12 +66,12 @@
     text-decoration: none;
     transition: all 0.2s;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    background-color: var(--primary-color);
+    background-color: var(--filled-control-background);
     color: white;
 }
 
 .ctaButtons a:hover {
-    background-color: var(--hover-color);
+    background-color: var(--filled-control-background-hover);
     color: white;
 }
 
@@ -93,7 +93,7 @@
     width: 2rem;
     height: 2rem;
     fill: white;
-    animation: bounce 3s infinite;
+    animation: bounce 3s;
     z-index: 998;
 }
 
@@ -123,4 +123,15 @@
     100% {
         opacity: 1;
     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .arrow {
+        animation: none;
+    }
+}
+
+.ctaButtons a:focus-visible {
+    outline: 3px solid var(--focus-indicator-on-dark-color);
+    outline-offset: 3px;
 }

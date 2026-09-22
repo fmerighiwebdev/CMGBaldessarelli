@@ -4,7 +4,7 @@ import styles from "./maintenance.module.css";
 
 export default function Maintenance() {
   return (
-    <section className={styles.maintenance}>
+    <main id="main-content" className={styles.maintenance}>
       <Image src="/images/hero.webp" alt="Sito web in manutenzione" fill priority />
       <div className={styles.overlay}>
         <Image
@@ -38,6 +38,6 @@ export default function Maintenance() {
           </a>
         </div>
       </div>
-    </section>
+    </main>
   );
 }

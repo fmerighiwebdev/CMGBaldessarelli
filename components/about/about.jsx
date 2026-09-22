@@ -35,9 +35,19 @@ export default function About() {
         "Ogni progetto nasce dall'analisi accurata delle necessità del cliente, utilizzando software 3D e tecniche avanzate di produzione. Realizziamo accessori di altissima qualità, garantendo precisione, durabilità e affidabilità. La nostra gamma di prodotti è pensata per supportare l'imprenditore agricolo con soluzioni innovative e personalizzate, offrendo un'assistenza continua per il successo delle sue attività.",
       imageComponent: (
         <ImageSlideshow
-          images={["/images/chi-siamo-2a.webp", "/images/chi-siamo-2b.webp"]}
+          images={[
+            {
+              src: "/images/chi-siamo-2a.webp",
+              alt: "Staffa metallica con tubo installata su un palo in cemento in un vigneto.",
+            },
+            {
+              src: "/images/chi-siamo-2b.webp",
+              alt: "Modello CAD 3D di una piastra portatubo per impianti agricoli.",
+            },
+          ]}
           width={600}
           height={400}
+          label="Dalla progettazione CAD all'installazione in vigneto"
         />
       ),
       imageOrder: "order-md-1",

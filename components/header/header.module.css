@@ -1,5 +1,5 @@
 .header {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.75);
   position: fixed;
   top: 0;
   left: 0;
@@ -63,7 +63,7 @@
 
 .dropdownButton:hover,
 .desktopMenu a:hover {
-  color: var(--hover-color);
+  color: var(--accent-text-on-dark-color);
 }
 
 .logoLink:focus-visible,
@@ -72,13 +72,13 @@
 .hamburger:focus-visible,
 .mobileMenu a:focus-visible,
 .mobileMenu summary:focus-visible {
-  outline: 3px solid var(--white);
+  outline: 3px solid var(--focus-indicator-on-dark-color);
   outline-offset: 4px;
 }
 
 /* NUOVO: Stile per la pagina attiva (accessibilità) */
 .desktopMenu a[aria-current="page"] {
-  color: var(--hover-color);
+  color: var(--accent-text-on-dark-color);
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
@@ -102,7 +102,7 @@
 }
 
 .submenu li a:hover {
-  color: var(--hover-color) !important;
+  color: var(--accent-text-on-dark-color) !important;
 }
 
 
